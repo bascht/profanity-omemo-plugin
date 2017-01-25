@@ -1,0 +1,4 @@
+/connect alice@prosody
+/plugins load prof_omemo_plugin.py
+/omemo on
+/quit

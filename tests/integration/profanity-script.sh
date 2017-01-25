@@ -1,6 +1,12 @@
 #!/bin/bash
 
-
+mkdir -p /home/profanity/.config/profanity
+cat > /home/profanity/.config/profanity/profrc <<EOF
+[ui]
+history=true
+[logging]
+chlog=true
+EOF
 
 cat > /home/profanity/.local/share/profanity/accounts <<EOF
 [${1}]
@@ -21,5 +27,5 @@ server=prosody
 tls.policy=disable
 script.start=${2}
 EOF
-
+#/bin/bash
 exec profanity -a ${1}

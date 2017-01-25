@@ -1,0 +1,6 @@
+/connect bob@prosody
+/chlog on
+/history on
+/plugins load prof_omemo_plugin.py
+/omemo on
+/quit

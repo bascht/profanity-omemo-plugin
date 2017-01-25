@@ -1,0 +1,3 @@
+/roster add alice@prosody Alice
+/sub request alice@prosody
+/quit

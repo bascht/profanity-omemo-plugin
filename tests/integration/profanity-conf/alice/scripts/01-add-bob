@@ -1,0 +1,3 @@
+/roster add bob@prosody Bob
+/sub request bob@prosody
+/quit

@@ -1,0 +1,5 @@
+/plugins load prof_omemo_plugin.py
+/omemo on
+/omemo start bob@prosody
+/msg bob@prosody Hey there!
+/quit

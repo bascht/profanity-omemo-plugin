@@ -28,4 +28,5 @@ services:
       dockerfile: Dockerfile.profanity
     volumes:
       - ./profanity-conf/bob:/home/profanity/.local/share/profanity/
+      - ./profanity-script.sh:/usr/local/bin/profanity-script.sh
     command: profanity -a bob@prosody
