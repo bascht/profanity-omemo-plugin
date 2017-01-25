@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-#set -x
+set -x
 
 RED='\033[0;33m'
 BROWN='\033[0;35m'
@@ -57,6 +57,7 @@ message "Test: Plugin is installed"
 rm -f $ALICE_LOG
 
 docker-compose run --rm alice profanity-script.sh alice@prosody 00-enable-omemo
+sleep 1 # Let's see if Travis is fooling me. :D
 success "grep 'Adding Disco Feature eu.siacs.conversations.axolotl.devicelist+notify' ${ALICE_LOG}"
 success "grep 'ProfOmemoPlugin - Announce own device list' ${ALICE_LOG}"
 success "grep 'Loaded plugin: prof_omemo_plugin.py' ${ALICE_LOG}"
