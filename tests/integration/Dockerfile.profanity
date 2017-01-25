@@ -29,7 +29,7 @@ USER profanity
 RUN cp -a /usr/src/profanity-omemo-plugin /home/profanity/profanity-omemo-plugin \
     && cd /home/profanity/profanity-omemo-plugin \
     && mkdir -p /home/profanity/.local/share/profanity/plugins/ \
-    && python setup.py install --force --user
+    && ./install.sh
 
 
 ENTRYPOINT ["/usr/local/bin/profanity-script.sh"]

@@ -30,3 +30,5 @@ services:
       - ./profanity-conf/bob:/home/profanity/.local/share/profanity/
       - ./profanity-script.sh:/usr/local/bin/profanity-script.sh
     command: profanity -a bob@prosody
+    environment:
+      TERM: xterm-color
