@@ -31,4 +31,5 @@ RUN cp -a /usr/src/profanity-omemo-plugin /home/profanity/profanity-omemo-plugin
     && ./install.sh
 
 
-ENTRYPOINT ["/usr/local/bin/profanity-script.sh"]
+ENTRYPOINT []
+CMD ["/usr/local/bin/profanity-script.sh"]

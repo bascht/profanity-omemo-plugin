@@ -1,24 +1,27 @@
 #!/bin/bash
 set -e
-set -x
+#set -x
 
 RED='\033[0;33m'
 BROWN='\033[0;35m'
 GREEN='\033[0;32m'
 CLEAR='\033[0m'
-message () { printf "\n${BROWN}##\n# $1\n##${CLEAR}\n\n"; }
+
+message () { printf "\n${BROWN}### $1 ###${CLEAR}\n\n"; }
 success () { run "${1}"; return $?; }
 failure () { run "${1}"; return $?; }
 run () {
     method=${FUNCNAME[1]};
+    set +e;
     out=$(eval $1);
     status=$?;
+    set -e;
     
     if  [[ $status -eq 0 && $method = "success" ]] || [[ $status -ne 0 && $method = "failure" ]] ; then
         printf "${GREEN}PASS: ${out}${CLEAR}\n";
         retval=0;
     else
-        printf "${RED}FAIL: ${out}${CLEAR}\n";
+        printf "${RED}FAIL: ${1} - Got:${out}${CLEAR}\n";
         retval=1;
     fi
 
@@ -46,6 +49,9 @@ docker-compose stop
 docker-compose rm -f
 
 docker-compose build
+
+message "Test: Starting Profanity"
+success "docker-compose run --rm alice profanity --version | grep 'Profanity, version 0.5.0'"
 
 message "Test: Plugin is installed"
 rm -f $ALICE_LOG
