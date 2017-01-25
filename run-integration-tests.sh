@@ -36,6 +36,9 @@ cd "${TESTDIR}"
 COMMIT=$(git log -n 1 --pretty=format:"%H")
 
 message "Preparing Build environment"
+echo "Docker Version $(docker --version)"
+echo "Docker Compose Version $(docker-compose --version)"
+
 rm -rf profanity-omemo-plugin
 git clone ../../ profanity-omemo-plugin
 git checkout $COMMIT
@@ -57,7 +60,7 @@ message "Test: Plugin is installed"
 rm -f $ALICE_LOG
 
 docker-compose run --rm alice profanity-script.sh alice@prosody 00-enable-omemo
-sleep 1 # Let's see if Travis is fooling me. :D
+sleep 10 # Let's see if Travis is fooling me. :D
 success "grep 'Adding Disco Feature eu.siacs.conversations.axolotl.devicelist+notify' ${ALICE_LOG}"
 success "grep 'ProfOmemoPlugin - Announce own device list' ${ALICE_LOG}"
 success "grep 'Loaded plugin: prof_omemo_plugin.py' ${ALICE_LOG}"
