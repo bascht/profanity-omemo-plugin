@@ -18,4 +18,6 @@ docker-compose rm -f
 docker-compose build alice
 
 #docker-compose run --rm alice file /home/profanity/.local/share/profanity/plugins/prof_omemo_plugin.py
+rm tests/integration/profanity-conf/alice/logs/profanity.log
 docker-compose run --rm alice alice@prosody 00-enable-omemo
+cat tests/integration/profanity-conf/alice/logs/profanity.log
