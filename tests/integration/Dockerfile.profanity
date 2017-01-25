@@ -28,7 +28,6 @@ USER profanity
 # Install local plugin version 
 RUN cp -a /usr/src/profanity-omemo-plugin /home/profanity/profanity-omemo-plugin \
     && cd /home/profanity/profanity-omemo-plugin \
-    && mkdir -p /home/profanity/.local/share/profanity/plugins/ \
     && ./install.sh
 
 

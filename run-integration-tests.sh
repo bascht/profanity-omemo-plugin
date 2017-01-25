@@ -14,10 +14,10 @@ run () {
     status=$?;
     
     if  [[ $status -eq 0 && $method = "success" ]] || [[ $status -ne 0 && $method = "failure" ]] ; then
-        printf "${GREEN}PASS: [$status][$method] ${out}${CLEAR}\n";
+        printf "${GREEN}PASS: ${out}${CLEAR}\n";
         retval=0;
     else
-        printf "${RED}FAIL: [$status][$method] ${out}${CLEAR}\n";
+        printf "${RED}FAIL: ${out}${CLEAR}\n";
         retval=1;
     fi
 
@@ -37,7 +37,8 @@ git clone ../../ profanity-omemo-plugin
 git checkout $COMMIT
 
 message "Cleaning up existing Profanity-Confs"
-rm -rf ${TESTDIR}/profanity-conf/{alice,bob}/{accounts,chatlogs,logs,capscache,pgp,plugin_settings,plugin_themes}
+rm -rf ${TESTDIR}/profanity-conf/{alice,bob}/{accounts,chatlogs,logs,capscache,pgp,plugin_settings,plugin_themes,plugins,otr,omemo}
+find ${TESTDIR}/profanity-conf
 
 message "Building Containers"
 docker-compose stop

@@ -2,6 +2,8 @@
 set -e
 
 set -e
+set -v
+set -x
 
 python setup.py install --force --user
 mkdir -p ~/.local/share/profanity/plugins

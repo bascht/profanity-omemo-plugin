@@ -15,7 +15,9 @@ services:
       context: .
       dockerfile: Dockerfile.profanity
     volumes:
-      - ./profanity-conf/alice:/home/profanity/.local/share/profanity/
+      - ./profanity-conf/alice/scripts:/home/profanity/.local/share/profanity/scripts
+      - ./profanity-conf/alice/logs:/home/profanity/.local/share/profanity/logs
+      - ./profanity-conf/alice/chatlogs:/home/profanity/.local/share/profanity/chatlogs
       - ./profanity-script.sh:/usr/local/bin/profanity-script.sh
     command: profanity -a alice@prosody
     environment:
@@ -27,7 +29,9 @@ services:
       context: .
       dockerfile: Dockerfile.profanity
     volumes:
-      - ./profanity-conf/bob:/home/profanity/.local/share/profanity/
+      - ./profanity-conf/bob/scripts:/home/profanity/.local/share/profanity/scripts
+      - ./profanity-conf/bob/logs:/home/profanity/.local/share/profanity/logs
+      - ./profanity-conf/bob/chatlogs:/home/profanity/.local/share/profanity/chatlogs
       - ./profanity-script.sh:/usr/local/bin/profanity-script.sh
     command: profanity -a bob@prosody
     environment:
