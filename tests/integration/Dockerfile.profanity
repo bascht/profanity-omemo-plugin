@@ -25,10 +25,10 @@ ADD ./profanity-script.sh /usr/local/bin/
 # Install local plugin version 
 ADD profanity-omemo-plugin/ /usr/src/profanity-omemo-plugin/
 
+USER profanity
 
 RUN cd /usr/src/profanity-omemo-plugin \
-    && python setup.py install --user
+    && ./install.sh
 
-USER profanity
 
 ENTRYPOINT ["/usr/local/bin/profanity-script.sh"]
