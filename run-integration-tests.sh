@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+set -x
 
 RED='\033[0;33m'
 BROWN='\033[0;35m'
