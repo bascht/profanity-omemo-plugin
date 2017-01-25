@@ -21,14 +21,15 @@ RUN apt update && apt install -y sudo unzip build-essential git automake autocon
 RUN apt install -y python-pip python-cffi libssl-dev
 
 ADD ./profanity-script.sh /usr/local/bin/
-
-# Install local plugin version 
 ADD profanity-omemo-plugin/ /usr/src/profanity-omemo-plugin/
 
 USER profanity
 
-RUN cd /usr/src/profanity-omemo-plugin \
-    && ./install.sh
+# Install local plugin version 
+RUN cp -a /usr/src/profanity-omemo-plugin /home/profanity/profanity-omemo-plugin \
+    && cd /home/profanity/profanity-omemo-plugin \
+    && mkdir -p /home/profanity/.local/share/profanity/plugins/ \
+    && python setup.py install --force --user
 
 
 ENTRYPOINT ["/usr/local/bin/profanity-script.sh"]

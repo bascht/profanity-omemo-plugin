@@ -21,5 +21,5 @@ server=prosody
 tls.policy=disable
 script.start=${2}
 EOF
-exec /bin/bash
+
 exec profanity -a ${1}
