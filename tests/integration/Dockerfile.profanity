@@ -1,0 +1,34 @@
+FROM ubuntu:16.04
+
+ADD https://github.com/boothj5/profanity/archive/0.5.0.tar.gz http://www.profanity.im/install-all.sh /usr/src/
+
+RUN adduser --disabled-password profanity
+RUN apt update && apt install -y sudo unzip build-essential git automake autoconf \
+    libssl-dev libexpat1-dev libncursesw5-dev libglib2.0-dev libnotify4 libnotify-dev libcurl3-dev \
+    libxss-dev libotr5-dev libreadline-dev libtool libgpgme11-dev libgtk2.0-dev autoconf-archive python-dev \
+    libpython2.7 libgtk2.0-0 libotr5-dev libgpgme11 libxss1 \
+    && cd /usr/src && tar -xvf /usr/src/0.5.0.tar.gz \
+    && tar -xvf 0.5.0.tar.gz \
+    && cd profanity-0.5.0 \
+    && ./bootstrap.sh \
+    && bash /usr/src/install-all.sh \
+    && apt remove --purge -y unzip build-essential automake autoconf \
+    libssl-dev libexpat1-dev libncursesw5-dev libglib2.0-dev libnotify-dev libcurl3-dev \
+    libxss-dev  libreadline-dev libtool libgpgme11-dev libgtk2.0-dev autoconf-archive python-dev \
+    && apt autoremove --purge -y \
+    && rm -rf /usr/src/*
+
+RUN apt install -y python-pip python-cffi libssl-dev
+
+ADD ./profanity-script.sh /usr/local/bin/
+
+# Install local plugin version 
+ADD profanity-omemo-plugin/ /usr/src/profanity-omemo-plugin/
+
+
+RUN cd /usr/src/profanity-omemo-plugin \
+    && python setup.py install --user
+
+USER profanity
+
+ENTRYPOINT ["/usr/local/bin/profanity-script.sh"]

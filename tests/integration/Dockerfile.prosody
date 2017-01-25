@@ -1,0 +1,2 @@
+FROM freeluna/prosody
+ENTRYPOINT /opt/create-accounts.sh

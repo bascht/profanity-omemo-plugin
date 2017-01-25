@@ -1,0 +1,31 @@
+version: '2'
+services:
+  prosody:
+    build:
+      dockerfile: Dockerfile.prosody
+      context: .
+    volumes:
+      - ./prosody-conf:/opt
+      - ./prosody-conf/prosody.cfg.lua:/etc/prosody/prosody.cfg.lua
+      - ./prosody-conf/create-accounts.sh:/entrypoint.sh
+  alice:
+    links:
+      - prosody
+    build:
+      context: .
+      dockerfile: Dockerfile.profanity
+    volumes:
+      - ./profanity-conf/alice:/home/profanity/.local/share/profanity/
+      - ./profanity-script.sh:/usr/local/bin/profanity-script.sh
+    command: profanity -a alice@prosody
+    environment:
+      TERM: xterm-color
+  bob:
+    links:
+      - prosody
+    build:
+      context: .
+      dockerfile: Dockerfile.profanity
+    volumes:
+      - ./profanity-conf/bob:/home/profanity/.local/share/profanity/
+    command: profanity -a bob@prosody
