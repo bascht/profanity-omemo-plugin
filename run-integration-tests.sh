@@ -38,6 +38,12 @@ COMMIT=$(git log -n 1 --pretty=format:"%H")
 message "Preparing Build environment"
 echo "Docker Version $(docker --version)"
 echo "Docker Compose Version $(docker-compose --version)"
+echo "Python Version $(python --version)"
+echo "#######################################"
+echo "Build Environment"
+env
+echo "#######################################"
+export TERM=xterm-256color
 
 rm -rf profanity-omemo-plugin
 git clone ../../ profanity-omemo-plugin
